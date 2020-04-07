@@ -2,13 +2,236 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://idea.web-lab.ml</id>
     <title>前端实验室博客</title>
-    <updated>2020-04-07T06:13:52.540Z</updated>
+    <updated>2020-04-07T09:13:05.407Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://idea.web-lab.ml"/>
     <link rel="self" href="https://idea.web-lab.ml/atom.xml"/>
     <logo>https://idea.web-lab.ml/images/avatar.png</logo>
     <icon>https://idea.web-lab.ml/favicon.ico</icon>
     <rights>All rights reserved 2020, 前端实验室博客</rights>
+    <entry>
+        <title type="html"><![CDATA[HTTPS 简析 - 加密、证书、签名与握手]]></title>
+        <id>https://idea.web-lab.ml/post/https-jian-xi-jia-mi-zheng-shu-qian-ming-yu-wo-shou/</id>
+        <link href="https://idea.web-lab.ml/post/https-jian-xi-jia-mi-zheng-shu-qian-ming-yu-wo-shou/">
+        </link>
+        <updated>2020-04-07T09:07:21.000Z</updated>
+        <content type="html"><![CDATA[<p>本文转自<a href="https://luan.ma/post/https-introduction/">https://luan.ma/post/https-introduction/</a></p>
+<h1 id="https有什么用">HTTPS有什么用</h1>
+<p>如果你对HTTPS了解不深，可能会觉得上了HTTPS就是把 http://变成<br>
+https://，然后有把小锁头在浏览器地址栏上。这看起来似乎可有可无。但是我们在申请 HTTPS<br>
+证书的时候却比较麻烦，除了要定时续签之外，有的证书还需要支付一定的费用。那么，我们到底加上 HTTPS 有什么作用呢？我总结了两点：</p>
+<ol>
+<li>加密传输数据，确保客户端和服务器之间传输的数据不被中间人窃取、篡改。</li>
+<li><strong>验证你访问的网站确实是该网站的控制人所发布的。</strong></li>
+</ol>
+<p>第一点我相信比较好理解，我们电脑连接服务器的过程中，可能会受到很多中间人的监控，比如你在学校上网可能受到学校网关的监控，你在公共WIFI上网可能被黑客监控，你在国内上网可能受到一些众所周知的监控等等，如果你访问<br>
+HTTP<br>
+协议的网站，那么不好意思，你所看到的所有网站内容，你发给服务器的密码，中间人都可以全部看到，甚至还可以篡改。所以，我们需要对客户端和服务端之间的传输数据进行加密，从而使中间人无法得知传输的真实内容。</p>
+<p>而第二点，是非常重要的，但是很多人可能没有意识到有什么用。当我们的 DNS 不可靠的时候，我们访问 <a href="http://www.baidu.com">http://www.baidu.com</a><br>
+可能会被错误指向一个恶意的IP，里面也是仿照百度的内容，但是嵌入了病毒，但是我们完全不知道，还以为是百度自己干的。但是有了 HTTPS ，我们访问<br>
+<a href="https://www.baidu.com">https://www.baidu.com</a> ，看到浏览器网址栏锁，那么我们就可以确信，这个网页的所有内容，都是域名的控制人，百度公司提供的。</p>
+<figure data-type="image" tabindex="1"><img src="https://cdn.nlark.com/yuque/0/2018/png/102759/1543319172165-cbbf2606-2a99-49f0-adcc-3b8b62ebece6.png" alt="image.png" loading="lazy"></figure>
+<p>对于第二点，可能你还没有直观的印象，你可以在本地的 hosts 中添加</p>
+<pre><code> 127.0.0.1 www.baidu.com  
+</code></pre>
+<p>把百度指向你的本机，然后你启动一个服务器软件，模拟 DNS 被人篡改的情况。现在，访问 <a href="http://www.baidu.com">http://www.baidu.com</a><br>
+，你可以看到百度的内容就成功被你篡改了。</p>
+<p>但是，你访问 <a href="https://www.baidu.com">https://www.baidu.com</a><br>
+，则发现，你如果不修改系统的设置，你永远也不可能在浏览器地址栏中看到那个小锁，并且会提示：不安全，原因很简单，你不是<br>
+<a href="http://www.baidu.com">www.baidu.com</a> 域名的控制人。所以 HTTPS 起到验证网站是否是域名控制人所有的作用。</p>
+<figure data-type="image" tabindex="2"><img src="https://cdn.nlark.com/yuque/0/2018/png/102759/1543319467281-cac07651-66b9-4fc6-8214-ea7d5cb9914e.png" alt="image.png " loading="lazy"></figure>
+<p>对于第二点，还有一种情况，叫中间人攻击</p>
+<figure data-type="image" tabindex="3"><img src="https://cdn.nlark.com/yuque/0/2018/png/102759/1543327234884-2ff4fc7f-226c-4f4a-91a9-147356c90ee3.png" alt="image.png" loading="lazy"></figure>
+<p>而 HTTPS 也可以防止这种情况发生。</p>
+<p><strong>那么，HTTPS 能否识别恶意网站呢？答案是不能的，恶意网站也可以申请 HTTPS，并且有地址栏锁</strong><br>
+，所以这个安全不等于网站本身是安全，只是说能确保网站确实是网站的域名的控制人发布的，而没有被第三方中途篡改、监听。如果黑客黑进了网站的服务器，那么这个时候<br>
+HTTPS 同样也有小锁，因为这个时候网站仍然是在网站域名的控制人的服务器上面。</p>
+<h1 id="一个脑洞大开的-https-系统">一个脑洞大开的 HTTPS 系统</h1>
+<p>我们先假设，我们不懂什么密码学知识，要实现上面两个功能，脑洞大开一下，我们应该怎么设计呢？</p>
+<p>首先，我规定好一种“加密”的方法，假设我们的网页只有英文，那么就把整个网页的所有的字母都位移 n 位，然后解密的时候，位移回来就可以了。</p>
+<figure data-type="image" tabindex="4"><img src="https://cdn.nlark.com/__puml/ba8877965143c98830632b24d9b98aa2.svg" alt="" loading="lazy"></figure>
+<p>现在，我们还要验证网站的内容是否是域名控制人提供的，那么我们还需要：</p>
+<figure data-type="image" tabindex="5"><img src="https://cdn.nlark.com/__puml/d9be867d33ec0a1988f823d50e4c434c.svg" alt="" loading="lazy"></figure>
+<p>也许看到这里你已经笑（ma）了（ren），因为我实现的系统根本都在做掩耳盗铃的把戏。</p>
+<ol>
+<li>加密算法和位移量 n 是公开传输的，那么中间人可以截取，从而解密之后的数据</li>
+<li>服务器声称他的身份，这个没有任何约束，假冒服务器也可以声称他是 乱码有限公司</li>
+<li>每次访问都要连接第三方鉴定机构，访问网站的速度很慢。</li>
+</ol>
+<h1 id="真实的-https">真实的 HTTPS</h1>
+<h2 id="加密方法和摘要方法">加密方法和摘要方法</h2>
+<p>首先，我先介绍 HTTPS 里面用到的加密方法，和 hash 摘要方法，如果你已经了解，可以跳过。</p>
+<h3 id="对称加密">对称加密</h3>
+<p>对称加密很好理解，就是只有一个密码，你可以用这个密码加密一段文本，也可以用这个密码解密刚刚加密的文本。比如：<br>
+你用 WinRAR 创建一个带密码的加密压缩包。当你下次要把这个压缩文件解开的时候，你需要输入【同样的】密码。<br>
+常见的对称加密算法有 DES</p>
+<h3 id="非对称加密">非对称加密</h3>
+<p>非对称加密是两个密码，分别叫公钥和私钥，非对称加密有个很神奇的特点：公钥加密的，只能用私钥解密，私钥加密的，只能用公钥解密。</p>
+<p>我们在 <a href="http://web.chacuo.net/netrsakeypair">http://web.chacuo.net/netrsakeypair</a> 可以用一种非对称加密的算法：RSA，随机生成一对这样的密钥：</p>
+<p>公钥：</p>
+<pre><code>   -----BEGIN PUBLIC KEY-----  
+   MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAND5ps7FJHtP6ssE6g1l92FR1cFTDjZ9  
+   JbdLHuRFB5mzKswOj7FpGVHErKA1wHmoxG9qHV70KxIBewYzqOrxWKcCAwEAAQ==  
+   -----END PUBLIC KEY-----  
+</code></pre>
+<p>私钥：</p>
+<pre><code>    -----BEGIN PRIVATE KEY-----  
+    MIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEA0PmmzsUke0/qywTq  
+    DWX3YVHVwVMONn0lt0se5EUHmbMqzA6PsWkZUcSsoDXAeajEb2odXvQrEgF7BjOo  
+    6vFYpwIDAQABAkBDIyG7Jk0NLOSy6tZDDbJHWuJApO1ZBiXa2FCJZ8AEWZ2xQJbi  
+    GxatFcIL8lC0kayueRtCNQDXQRnsGslG8bqJAiEA8YkyBzOue03aO+EM/Dfj7JX6  
+    ZGIUEArFg+wbe+iZBF0CIQDdfUrb5BGKveORtl05I6W55p5zlR9kA23mCnZETvHA  
+    0wIgdtEFsjNDPtbiZxhjWeNolOaGYUE6G1YhKa9JKeAW/eUCIDpHKVdKX0M+S46f  
+    iU/rjUOo5rBK4IOUU2pf/lZi30F5AiEAz5v9XcTtk6OuNBOb8fjLhyg3FJ1BJoLT  
+    7OsqePL3Q1g=  
+    -----END PRIVATE KEY-----  
+</code></pre>
+<p>现在，我们有待加密的文本：</p>
+<pre><code>    好好学习，天天向上  
+</code></pre>
+<p>用公钥加密的结果：</p>
+<pre><code>UvrUthcLQk5aDFGaKlblMZuIR4goomvrKebRpkUftvpXvjKBLYvJiZiRTiyB2s6Bb5ugNEmnjd21aZboJ2moew==  
+</code></pre>
+<p>以上的密文只能用私钥来解密。<br>
+同样，私钥加密的密文，只能用公钥来解密。</p>
+<p>那么，这种加密算法的意义是什么呢？</p>
+<ol>
+<li>如果一段密文可以用公钥解密，证明这段密文是由掌握者私钥的人加密的，而掌握私钥的人通常是服务端。 <strong>这是验证的功能</strong> 。</li>
+<li>一段文字用公钥加密后，只有持有私钥的人才能解密，掌握私钥的人通常是服务端。 <strong>这是加密的功能。</strong></li>
+</ol>
+<h3 id="hash-摘要方法">Hash 摘要方法</h3>
+<p>也称为消息摘要算法。可以将任意长度的文本转换为较短的固定长度的二进制值，并且源文本一旦修改，那么它们的 hash 是不一样的，日常生活中，我们常常碰见的<br>
+MD5，SHA1 都是 hash 算法。</p>
+<p>我们可以把一个很长的的文件，进行 hash 算法，他永远也只会输出固定长度，这非常节省空间，又确保了源文件没有在传输或者复制的时候被调包。</p>
+<p>比如，Windows 10 1803<br>
+的官方镜像：cn_windows_10_business_edition_version_1803_updated_aug_2018_x64_dvd_57e5b984.iso<br>
+足足有 4.86 GB 大，但是他的 SHA1值只有那么长：</p>
+<pre><code>    533a5c7a732aefc7025f2128ffe0a4f0e5b0ed46  
+</code></pre>
+<h2 id="证书-签名和第三方机构">证书、签名和第三方机构</h2>
+<p>首先，HTTPS 要验证，你访问的网站确实是该网站的控制人所发布的。</p>
+<p>这要用到我们上面提到的非对称加密一个非常核心的功能： <strong>验证功能</strong> 。</p>
+<p>博主博客的域名是 luan.ma ，我自己持有私钥和公钥（可以直接随机生成），我把一串字符（网页）加密之后，把 <strong>公钥和密文</strong><br>
+发布给任何人（包括你），任何人通过这个公钥解密，如果能成功解密，并且这个公钥确实是我发给你的，那么说明，这个密文确实是我发出的，而没有被中间人调包，因为，全世界只有我持有这一套配对的公钥和私钥。</p>
+<p>那么，关键的问题是，如何确定这个公钥的是不是真的是我发出的呢？我们需要一个第三方机构 ：数字证书管理机构 （Certificate Authority<br>
+）简称 CA 来证明。</p>
+<p>我会向一个非常有公信力的 CA 申请，把我 <strong>域名、个人资料和公钥</strong> 提交给CA，CA确认 <strong>luan.ma 域名是我的（通过DNS验证）</strong><br>
+，并且确认我的信息是真实的。之后，CA会把 <strong>我的信息 和 我的公钥</strong> 制作成一个 <strong>证书</strong> ，然后用 CA<br>
+自己的私钥加密（CA手里也有一对公钥和私钥），附上CA自己的名字。然后让我取回CA签发的 <strong>证书</strong> 。最大的CA公司是<br>
+DigiCert，常见的可以签发免费证书的CA有 诚信亚洲，let’s encrypt 等。</p>
+<p>证书可以公开发布，除了域名、网站主信息、CA名称外，还有有效期，附加域名（加钱），公司名（加钱）等信息：</p>
+<p>下面是百度的证书的主域名、颁发的CA、网站主信息、公钥、可用域名。<br>
+<img src="https://cdn.nlark.com/yuque/0/2018/png/102759/1543494016517-d61646ee-7c4f-4693-804a-50de5356e3e0.png" alt="image.png | left |259x330" loading="lazy"><img src="https://cdn.nlark.com/yuque/0/2018/png/102759/1543494054089-cbf9bc4b-6a8f-4b9a-a6d4-909e2f066d7f.png" alt="image.png| left |259x326.9703703703704" loading="lazy"><img src="https://cdn.nlark.com/yuque/0/2018/png/102759/1543494131333-1f11ca04-6b98-48e6-b7ac-a8870a1d48a9.png" alt="image.png| left |259x321.7545164718385" loading="lazy">![image.png<br>
+| left |<br>
+259x329.1859723698193](https://cdn.nlark.com/yuque/0/2018/png/102759/1543494241229-45c519cc-<br>
+ca05-4920-8fb1-6573e6cb377b.png)<img src="https://cdn.nlark.com/yuque/0/2018/png/102759/1543494397219-351b9fcf-5016-4ea1-8a91-23c77b168705.png" alt="image.png | left |259x329.1859723698193" loading="lazy"></p>
+<p>那么，这个证书被做出来之后，我再把证书和他的密文发给你，你先用CA的公钥解密证书（如果证书不是CA私钥加密的，无法用公钥解密），解密后看到我的公钥（<br>
+<strong>这个公钥是我的这一点，由CA公证、担保</strong> ），然后如果我的公钥可以解密密文，那么就说明，这个密文是我自己发出来的，而不是别人。</p>
+<p>那么，聪明的你也会问了，CA的公钥要怎么获取呢？要不要从CA的网站上面下载呢？我怎么知道CA的公钥到底是不是CA的呢？这好像变成了鸡生蛋，蛋生鸡的问题，</p>
+<p>不过，解决这个问题其实很简单，也很笨，因为 CA<br>
+的个数是有限的，所以，只要CA和浏览器厂商和操作系统搞好关系，叫他们把公钥预装在系统或者浏览器里面，就没有问题了。当A出示一个证书之后，按照证书上面 CA<br>
+的名字，就可以获取到对应CA的公钥了。通常，CA的公钥也在一个CA自己给自己做的证书里面，叫做 <strong>根证书</strong> 。所以，这里有个<br>
+Bug，根证书的真实性由浏览器和操作系统担保的，如果你的浏览器是不可信的（比如某些国产浏览器）或者你从奇怪的网站上面下载了操作系统安装文件，那么里面的公钥可能会被别有用心的人修改，那么你整个电脑的HTTPS体系就不再可靠了。</p>
+<figure data-type="image" tabindex="6"><img src="https://cdn.nlark.com/yuque/0/2018/png/102759/1543324283495-1cdfa554-9d61-4fa5-b3d2-935a31a18bef.png" alt="image.png | left |625x269" loading="lazy"></figure>
+<p>这里还有几个小问题。 <strong>第一</strong><br>
+个，证书的内容里面有A的信息和A的公钥，可能内容比较长，如果我们用私钥加密所有信息，那么整张证书的体积可能会变得非常大，在SSL诞生初期的二十多年前，这可能是网络不能容忍的。那么，我们要怎么优化呢？答案就是，我们对证书的正文部分不加密，而是对正文做一个<br>
+Hash 信息摘要，变成一个很短的字符串，成为指纹，然后只用私钥加密 Hash 这部分，称为签名，放入证书正文的后面。验证的时候，用CA的公钥解密<br>
+Hash，然后重新计算一次正文的 Hash，两相比对，即可知道证书的真伪。（关于指纹机制为什么存在，这只是我个人的观点）。</p>
+<p>图：百度证书的Hash指纹的算法是sha256，Hash 指纹是d6aa..<br>
+<img src="https://cdn.nlark.com/yuque/0/2018/png/102759/1543494654132-05d873d6-bc9a-43ff-a2aa-e003f3366fae.png" alt="image.png | left |259x329.1859723698193" loading="lazy"><img src="https://cdn.nlark.com/yuque/0/2018/png/102759/1543494808328-a4215e43-4d13-47d9-bad3-14a9b5c4e087.png" alt="image.png| left |259x329.76200640341517" loading="lazy"></p>
+<p><strong>第二</strong><br>
+个小问题，旧CA的根证书可能在许多老系统中都已经存在了，比如XP电脑。假设我现在想自己建一个CA，怎么办呢？难不成我还得跟这么浏览器厂商、系统厂商一个一个谈判吗？即使谈判成功，那旧电脑和旧浏览器也不会再更新了，难不成我CA做生意还要等到100年后XP全部淘汰才行？有三个解决办法：</p>
+<ol>
+<li>如果只是在自己的地盘当CA，只需要把你的地盘的所有电脑都导入这个CA的根证书即可（反面教材：12306旧版要求公众下载自己的CA的根证书，新版已经全部换成公认CA的）。</li>
+<li>如果你要当世界都公认的CA，并且已经和主流浏览器和操作系统厂商谈判好之后，可以把新证书通过 OSCP 在线同步到世界各地的电脑中（OSCP也可以用于第一种，在你的地盘同步）。</li>
+<li>如果你没有能力完成上面的谈判的话，那么最好的方法是找现有的CA公司，花钱当小弟，让CA公司给你签发一张二级根证书证明你的公钥可靠，然后你再用你的私钥给别人签发证书。给别人签发证书的时候，要把自己的二级根证书和用户证书做成一张绑定证书。用户校验的时候先通过系统中的一级根证书的公钥校验二级根证书的有效性，再用二级根证书的公钥校验用户证书的有效性。这个称为 <strong>证书链</strong> 机制。</li>
+</ol>
+<p>图：证书链机制：Let’s Encrypt 是二级 CA</p>
+<figure data-type="image" tabindex="7"><img src="https://cdn.nlark.com/yuque/0/2018/png/102759/1543494902255-fa164ac1-0f51-431b-88f8-d3a108402ca3.png" alt="image.png | left |259x327.0258342303552" loading="lazy"></figure>
+<p><strong>第三</strong><br>
+个小问题，凭什么他们就能当CA，我们就只能当小弟呢？CA一般是由有良好信用历史的公司担任，CA最重要的工作，也是底线，就是要验证申请证书这个人是不是他本人，或者说，给这个网站申请证书的人，到底是不是这个网站的域名控制人（这可以通过DNS添加TXT记录验证）。如果公认CA未经域名持有人同意就私自签发了某网站的证书，并且被人发现的话，那后果是非常严重的，会被浏览器或操作系统通过<br>
+OSCP 把 该CA 的根证书 加入 证书吊销列表 (Certificate Revocation List ，简称： <strong>CRL</strong><br>
+)，那么这个CA就没得玩了，只能认个大哥把自己 <strong>变成二级CA</strong> ，或者停止业务。CA烈士墙有：CNNIC，沃通，<br>
+赛门铁克。另外一方面，如果，如果CA私自签发还没被发现的话，这里面也存在着巨大的利益，完全有可能被政府或者别的机构利用。Windows系统有61家CA的根证书被信任，只要有其中一家<br>
+CA 未经验证就给黑客签发了一个证书，就可以把中间人由黑的变成白的。</p>
+<p>图：曾经的一级CA沃通，现在沦为二级CA：</p>
+<figure data-type="image" tabindex="8"><img src="https://cdn.nlark.com/yuque/0/2018/png/102759/1543495018076-0a60c792-2e92-45d9-99cc-264822a24736.png" alt="image.png | left |259x328.6354941551541" loading="lazy"></figure>
+<p><strong>第四</strong> 个小问题，怎么样给CA充钱变得更强？大家可以去CA的网站参观，比如：<a href="https://www.trustasia.com/">https://www.trustasia.com/</a><br>
+EV SSL （Extended Validation） （证书：<br>
+适用于中大型企业网站，验证域名和公司，地址栏显示公司名称。1-5个工作日完成申请，验证域名和公司，地址栏显示公司名称。比如CA自己的网站会用，装B用，非常贵。<br>
+OV SSL （Organization Validation）证书：<br>
+适用于中小企业网站，验证域名和公司，证书内显示公司信息。1-5个工作日完成申请，验证域名和公司，可提高网站可信度。大部分企业网站会用，比如百度、Google、QQ等均使用OV证书，比较贵。<br>
+DV SSL （Domain Validation） 证书：只验证域名，小网站和个人网站可用，10分钟内可以通过。有免费的。<br>
+还有加域名通配符，加额外域名等加钱套餐。</p>
+<p><strong>第五</strong><br>
+个小问题，证书有效期最长可以签多长？为什么？2018年3月1日起，所有公开信任的SSL证书，最长有效期缩短为2年(825天)，建议网站所有者提前做好相应准备。新规由国际标准组织CAB<br>
+Forum在2017年第193号投票通过。缩短有效期的最重要原因是，你的公司可能倒闭了，域名可能过期了，被接盘侠注册了，但是你还持有这个域名的证书，这是不合理，也不安全的，所以一般证书有效期都为一年，而较为宽松的<br>
+Let’s encrypt 证书的有效期只有三个月。</p>
+<h2 id="https连接">HTTPS连接</h2>
+<p>讲了这么多废话，现在终于进入正题，HTTPS是怎么连接的呢？</p>
+<p>加密传输这个问题很好解决，因为我们有了对称加密算法，只需要服务端和浏览器同时知道密码，就可以进行稳定的加密传输了。</p>
+<p><strong>现在主要问题变成，在第一次连接时，如何在中间人监听的情况下，服务端和浏览器协商出两个人都知道，中间人不知道的密码，并且浏览器对服务端进行身份确认</strong><br>
+，这就要用到 非对称加密 的算法，用 RSA 或者 DH - RSA 进行密钥协商，也叫 HTTPS 握手，这是 HTTPS 的重点。</p>
+<h3 id="rsa握手">RSA握手</h3>
+<p>第一步，浏览器给出协议版本号、一个客户端生成的带时间戳随机数（Client random），以及一个 seesion-id 本次会话<br>
+id，以及客户端支持的加密方法。</p>
+<p>第二步，服务器确认双方使用的加密方法，并给出 <strong>数字证书</strong> （内含公钥）、以及一个服务器生成的带时间戳随机数（Server random）。</p>
+<p>第三步，浏览器确认数字证书有效（先用电脑的CA的公钥解密指纹是否有效，见证书验证过程），保存服务器随机数。然后生成一个新的随机数（Premaster<br>
+secret），并使用数字证书中的公钥，加密这个随机数，发给浏览器。</p>
+<p>第四步，服务器使用自己的私钥，解密浏览器发来的随机数（即Premaster secret）。</p>
+<p>第五步，浏览器和服务器根据约定的加密方法，使用前面的三个随机数，生成”对话密钥”（session key），用来加密接下来的整个对话过程。（之后用<br>
+seesion key 进行对称机密）</p>
+<p>这里的 Client random 和 Server random<br>
+可以防止重放攻击，即可以防止黑客截取了密文，仿造用户和数据包直接多次发送给服务器，服务器如果没有这些随机数验证之前是否已经生成过 seesion<br>
+key，那么很可能被黑客利用。比如说，仿造用户多次下单等。</p>
+<figure data-type="image" tabindex="9"><img src="https://cdn.nlark.com/yuque/0/2018/png/102759/1543325990220-d531209f-d8c3-43c2-a2cd-79569edd1d5c.png" alt="image.png | left |827x612" loading="lazy"></figure>
+<figure data-type="image" tabindex="10"><img src="https://cdn.nlark.com/yuque/0/2018/png/102759/1543328566313-d528a70d-d8b4-4c07-9be8-11ed956d9d5f.png" alt="image.png | left |602x481" loading="lazy"></figure>
+<p>单纯RSA有个致命的问题，因为公钥和私钥一经生成，就一般不会再修改，如果你的私钥被泄露，那么我通过截取你的握手时候的数据，就可以得到你的 Seesion<br>
+Key，从而破解你的加密内容。</p>
+<h3 id="dh-rsa握手">DH-RSA握手</h3>
+<p>这种密钥协商的方法比上面的 RSA 更安全，步骤如下：</p>
+<ol>
+<li>客户端先连上服务端，发送协议版本号，一个临时带时间戳随机数 和 本次会话 id</li>
+<li>服务端生成一个随机数 s 作为自己的私钥，然后指定 DH 算法参数 (p, g)，并计算出临时公钥 S= g^s % p</li>
+<li>服务端把证书，发给浏览器</li>
+<li>服务端把 DH 算法的算法参数 (p, g)，临时公钥S，服务器临时随机数 ，经过摘要签名后，发给浏览器</li>
+<li>浏览器验证证书有效，验证上面的数据有效，通过服务器的公钥，提取 DH 算法参数 (p, g) 和 临时公钥 S （防篡改）</li>
+<li>浏览器生成一个随机数 c 作为自己的私钥，然后计算出临时公钥 C = g^c % p</li>
+<li>浏览器把 C 发送给服务端</li>
+<li>客户端和服务端根据 DH 算法 （ <strong>S^c % P == C ^ s % P</strong> ）各自计算出相同的 seesion-key 作为会话密钥</li>
+</ol>
+<p>p,q的选择</p>
+<ol>
+<li>p 必须是质数且足够大（至少300位）</li>
+<li>s，c 也要足够大（至少100位），且必须是随机生成。</li>
+<li>g 必须是质数，【不】需要很大，比如 2 或 3 或 5 都可以。<br>
+这样，即使中间人可以截取任何数据，但是因为无法倒推出私钥（求解“离散对数问题”难解），无法求解出最终结果。从而巧妙的提高了安全性。</li>
+</ol>
+<figure data-type="image" tabindex="11"><img src="https://cdn.nlark.com/yuque/0/2018/png/102759/1543326236984-7e408f8a-3100-4f69-bc90-93d3b573398c.png" alt="image.png | left |827x577" loading="lazy"></figure>
+<p>一般现实实现中，使用的是基于以上算法改进的 ECDHE-RSA 算法</p>
+<h3 id="断开重连">断开重连</h3>
+<p>握手阶段用来建立SSL连接。如果出于某种原因，对话中断，就需要重新握手。</p>
+<p>每一次对话都有一个编号（session<br>
+ID）。如果对话中断，下次重连的时候，只要客户端给出这个编号，且服务器有这个编号的记录，双方就可以重新使用已有的”对话密钥”，而不必重新生成一把。</p>
+<figure data-type="image" tabindex="12"><img src="https://cdn.nlark.com/yuque/0/2018/png/102759/1543329634538-28dd37a6-1a5c-4225-ac7b-3e7262807e24.png" alt="image.png | left |827x321" loading="lazy"></figure>
+<h3 id="tls13-优化">TLS1.3 优化</h3>
+<p>TLS1.3 是 HTTPS 的最新版本，他的最终版本已经于 2018年 8 月发布，Chrome 69+ 版本已经支持。将在不久进入国际标准。<br>
+TLS1.3 优化了握手的流程，减少了来回程的数量：</p>
+<figure data-type="image" tabindex="13"><img src="https://tlseminar.github.io/images/tls-13/handshake1.2.png" alt="TLS 1.2 Handshake |left" loading="lazy"></figure>
+<p>TLS1.2版本的握手</p>
+<figure data-type="image" tabindex="14"><img src="https://tlseminar.github.io/images/tls-13/handshake1.3.png" alt="TLS 1.3 Handshake |left" loading="lazy"></figure>
+<p>TLS1.3版本的握手</p>
+<p>可见，在分享临时公钥时，浏览器在验证服务端证书之前，先行发出了临时公钥。这样可以缩减一步连接的时间。</p>
+<p>另外，在重连时，也更快了，即，还没重连好，就把HTTP头给带上了：</p>
+<figure data-type="image" tabindex="15"><img src="https://tlseminar.github.io/images/tls-13/tls1_3_0rtt.jpg" alt="0-RTT | left" loading="lazy"></figure>
+<h1 id="参考资料">参考资料</h1>
+<p><a href="https://program-think.blogspot.com/2016/09/https-ssl-tls-3.html">https://program-think.blogspot.com/2016/09/https-ssl-tls-3.html</a><br>
+&lt;https://www.acunetix.com/blog/articles/establishing-tls-ssl-connection-<br>
+part-5/&gt;<br>
+<a href="http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html">http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html</a><br>
+<a href="https://tlseminar.github.io/tls-13/">https://tlseminar.github.io/tls-13/</a></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[给网页适配黑暗模式(不使用darkmode.js)]]></title>
         <id>https://idea.web-lab.ml/post/darkmode-js/</id>
