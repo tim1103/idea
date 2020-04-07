@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>关于 | 前端实验室博客</title>
-<link rel="shortcut icon" href="https://idea.web-lab.ml/favicon.ico?v=1586221063355">
+<link rel="shortcut icon" href="https://idea.web-lab.ml/favicon.ico?v=1586221330148">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://idea.web-lab.ml/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="关于 | 前端实验室博客 - Atom Feed" href="https://idea.web-lab.ml/atom.xml">
@@ -28,7 +28,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://idea.web-lab.ml">
-  <img class="avatar" src="https://idea.web-lab.ml/images/avatar.png?v=1586221063355" alt="">
+  <img class="avatar" src="https://idea.web-lab.ml/images/avatar.png?v=1586221330148" alt="">
   </a>
   <h1 class="site-title">
     前端实验室博客
@@ -123,6 +123,32 @@
 
         
 
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '511fccea37ca1c9a49e0',
+    clientSecret: '6abd188df7128b42398b5ba3ca886ca8b0df4e39',
+    repo: 'idea',
+    owner: 'tim1103',
+    admin: ['tim1103'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
         
 
         <div class="site-footer">
