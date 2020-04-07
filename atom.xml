@@ -2,13 +2,105 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://idea.web-lab.ml</id>
     <title>前端实验室博客</title>
-    <updated>2020-04-07T06:01:19.968Z</updated>
+    <updated>2020-04-07T06:04:34.026Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://idea.web-lab.ml"/>
     <link rel="self" href="https://idea.web-lab.ml/atom.xml"/>
     <logo>https://idea.web-lab.ml/images/avatar.png</logo>
     <icon>https://idea.web-lab.ml/favicon.ico</icon>
     <rights>All rights reserved 2020, 前端实验室博客</rights>
+    <entry>
+        <title type="html"><![CDATA[发现个Chrome自动操控小恐龙的脚本]]></title>
+        <id>https://idea.web-lab.ml/post/fa-xian-ge-chrome-zi-dong-cao-kong-xiao-kong-long-de-jiao-ben/</id>
+        <link href="https://idea.web-lab.ml/post/fa-xian-ge-chrome-zi-dong-cao-kong-xiao-kong-long-de-jiao-ben/">
+        </link>
+        <updated>2020-04-07T06:03:17.000Z</updated>
+        <content type="html"><![CDATA[<pre><code class="language-js">function TrexRunnerBot() {
+  const makeKeyArgs = (keyCode) =&gt; {
+    const preventDefault = () =&gt; void 0;
+    return {keyCode, preventDefault};
+  };
+
+  const upKeyArgs = makeKeyArgs(38);
+  const downKeyArgs = makeKeyArgs(40);
+  const startArgs = makeKeyArgs(32);
+
+  if (!Runner().playing) {
+    Runner().onKeyDown(startArgs);
+    setTimeout(() =&gt; {
+      Runner().onKeyUp(startArgs);
+    }, 500);
+  }
+
+  function conquerTheGame() {
+    if (!Runner || !Runner().horizon.obstacles[0]) return;
+
+    const obstacle = Runner().horizon.obstacles[0];
+
+    if (obstacle.typeConfig &amp;&amp; obstacle.typeConfig.type === 'SNACK') return;
+
+    if (needsToTackle(obstacle) &amp;&amp; closeEnoughToTackle(obstacle)) tackle(obstacle);
+  }
+
+  function needsToTackle(obstacle) {
+    return obstacle.yPos !== 50;
+  }
+
+  function closeEnoughToTackle(obstacle) {
+    return obstacle.xPos &lt;= Runner().currentSpeed * 18;
+  }
+
+  function tackle(obstacle) {
+    if (isDuckable(obstacle)) {
+      duck();
+    } else {
+      jumpOver(obstacle);
+    }
+  }
+
+  function isDuckable(obstacle) {
+    return obstacle.yPos === 50;
+  }
+
+  function duck() {
+    Runner().onKeyDown(downKeyArgs);
+
+    setTimeout(() =&gt; {
+      Runner().onKeyUp(downKeyArgs);
+    }, 500);
+  }
+
+  function jumpOver(obstacle) {
+    if (isNextObstacleCloseTo(obstacle))
+      jumpFast();
+    else
+      Runner().onKeyDown(upKeyArgs);
+  }
+
+  function isNextObstacleCloseTo(currentObstacle) {
+    const nextObstacle = Runner().horizon.obstacles[1];
+
+    return nextObstacle &amp;&amp; nextObstacle.xPos - currentObstacle.xPos &lt;= Runner().currentSpeed * 42;
+  }
+
+  function jumpFast() {
+    Runner().onKeyDown(upKeyArgs);
+    Runner().onKeyUp(upKeyArgs);
+  }
+
+  return {conquerTheGame: conquerTheGame};
+}
+
+let bot = TrexRunnerBot();
+let botInterval = setInterval(bot.conquerTheGame, 2);
+</code></pre>
+<hr>
+<p>食用方法:直接粘贴进<code>Console</code>里,按下空格,自动起跳<br>
+效果:<br>
+<img src="https://idea.web-lab.ml/post-images/1586239462374.png" alt="" loading="lazy"><br>
+这个不小心按到了空格...恐龙站在了鸟的头上.... 😂</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Office开发人员中心申请]]></title>
         <id>https://idea.web-lab.ml/post/Office-365-free/</id>
