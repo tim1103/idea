@@ -2,26 +2,24 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>关于 | 前端实验室博客</title>
+<title>给网页适配黑暗模式(不使用darkmode.js) | 前端实验室博客</title>
 <link rel="shortcut icon" href="https://idea.web-lab.ml/favicon.ico?v=1586239989958">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://idea.web-lab.ml/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="关于 | 前端实验室博客 - Atom Feed" href="https://idea.web-lab.ml/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="给网页适配黑暗模式(不使用darkmode.js) | 前端实验室博客 - Atom Feed" href="https://idea.web-lab.ml/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="
-欢迎来到我的小站呀，很高兴遇见你！🤝
+    <meta name="description" content="之前想要给某个陈旧的网页适配黑暗模式......去查了一圈,查到这些(部分经过修改):
+优势
 
-🏠 关于本站
-本站主页是https://web-lab.ml/,欢迎来访!
-👨‍💻 博主是谁
-是个爱折腾的.....博主
-📬 联系我呀
-留言即可!
-..." />
-    <meta name="keywords" content="" />
+可大幅减少耗电量（具体取决于设备的屏幕技术）。
+为弱视以及对强光敏感的用户提高可视性。
+让所有人都可以在光线较暗的环境中更轻松地使用设备。
+
+系..." />
+    <meta name="keywords" content="黑暗模式" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -83,38 +81,97 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              关于
+              给网页适配黑暗模式(不使用darkmode.js)
             </h2>
             <div class="post-info">
               <span>
-                2019-01-25
+                2020-04-07
               </span>
               <span>
-                1 min read
+                2 min read
               </span>
+              
+                <a href="https://idea.web-lab.ml/tag/CME9pjZ75/" class="post-tag">
+                  # 黑暗模式
+                </a>
               
             </div>
             
+              <img class="post-feature-image" src="https://idea.web-lab.ml/post-images/darkmode-js.jpg" alt="">
+            
             <div class="post-content-wrapper">
               <div class="post-content">
-                <blockquote>
-<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
-</blockquote>
-<h2 id="关于本站">🏠 关于本站</h2>
-<p>本站主页是<a href="https://web-lab.ml/">https://web-lab.ml/</a>,欢迎来访!</p>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
-<p>是个爱折腾的.....博主</p>
-<h2 id="联系我呀">📬 联系我呀</h2>
-<p>留言即可!</p>
+                <p>之前想要给某个陈旧的网页适配黑暗模式......去查了一圈,查到这些(部分经过修改):</p>
+<h3 id="优势">优势</h3>
+<ul>
+<li>可大幅减少耗电量（具体取决于设备的屏幕技术）。</li>
+<li>为弱视以及对强光敏感的用户提高可视性。</li>
+<li>让所有人都可以在光线较暗的环境中更轻松地使用设备。</li>
+</ul>
+<h3 id="系统兼容情况">系统兼容情况</h3>
+<ul>
+<li>macOS 10.14 引入了 darkmode</li>
+<li>iOS13 2019 年 3 月发布的 iOS13 版本加入了 darkmode</li>
+<li>Android 10 (API 级别 29) 及更高版本中提供深色主题背景</li>
+<li>Windows10 2018.10.10</li>
+<li>微信内已经开始支持黑暗模式了</li>
+</ul>
+<p>可见系统适配情况非常可观。</p>
+<hr>
+<h1 id="html-5适配">Html 5适配</h1>
+<h2 id="css-适配">CSS 适配</h2>
+<hr>
+<p>通过媒体查询<code>@media(prefers-color-scheme: dark)</code>来适配<br>
+<code>prefers-color-scheme</code>  的值有两个 <code>dark</code> 和 <code>light</code> 。</p>
+<h3 id="demo">Demo：</h3>
+<pre><code>body {
+  background: #ffffff;
+  color: #333;
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #000000;
+    color: #eee;
+  }
+}
+</code></pre>
+<h2 id="javascript-适配">Javascript 适配</h2>
+<hr>
+<h3 id="demo-2">Demo：</h3>
+<pre><code>if (
+  window.matchMedia &amp;&amp;
+  window.matchMedia(&quot;(prefers-color-scheme: dark)&quot;).matches
+) {
+  //你要写的黑暗模式下的动作
+}
+</code></pre>
+<p>效果不错 😂</p>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99">🏠 关于本站</a></li>
-<li><a href="#%E5%8D%9A%E4%B8%BB%E6%98%AF%E8%B0%81">👨‍💻 博主是谁</a></li>
-<li><a href="#%E8%81%94%E7%B3%BB%E6%88%91%E5%91%80">📬 联系我呀</a></li>
+<li>
+<ul>
+<li><a href="#%E4%BC%98%E5%8A%BF">优势</a></li>
+<li><a href="#%E7%B3%BB%E7%BB%9F%E5%85%BC%E5%AE%B9%E6%83%85%E5%86%B5">系统兼容情况</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#html-5%E9%80%82%E9%85%8D">Html 5适配</a>
+<ul>
+<li><a href="#css-%E9%80%82%E9%85%8D">CSS 适配</a>
+<ul>
+<li><a href="#demo">Demo：</a></li>
+</ul>
+</li>
+<li><a href="#javascript-%E9%80%82%E9%85%8D">Javascript 适配</a>
+<ul>
+<li><a href="#demo-2">Demo：</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -124,6 +181,15 @@
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://idea.web-lab.ml/post/gei-wang-ye-gua-pei-hei-an-mo-shi-bu-shi-yong-darkmodejs/">
+              <h3 class="post-title">
+                给网页适配黑暗模式(不使用darkmode.js)
+              </h3>
+            </a>
+          </div>
         
 
         
