@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://idea.web-lab.ml</id>
     <title>前端实验室博客</title>
-    <updated>2020-04-07T01:18:18.490Z</updated>
+    <updated>2020-04-07T01:25:03.935Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://idea.web-lab.ml"/>
     <link rel="self" href="https://idea.web-lab.ml/atom.xml"/>
@@ -11,8 +11,8 @@
     <rights>All rights reserved 2020, 前端实验室博客</rights>
     <entry>
         <title type="html"><![CDATA[测试一下]]></title>
-        <id>https://idea.web-lab.ml/post/ce-shi-yi-xia/</id>
-        <link href="https://idea.web-lab.ml/post/ce-shi-yi-xia/">
+        <id>https://idea.web-lab.ml/post/test/</id>
+        <link href="https://idea.web-lab.ml/post/test/">
         </link>
         <updated>2020-04-07T01:15:53.000Z</updated>
         <content type="html"><![CDATA[<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext>LaTeX</mtext></mrow><annotation encoding="application/x-tex">\LaTeX</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.89883em;vertical-align:-0.2155em;"></span><span class="mord text"><span class="mord textrm">L</span><span class="mspace" style="margin-right:-0.36em;"></span><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.68333em;"><span style="top:-2.904999em;"><span class="pstrut" style="height:2.7em;"></span><span class="mord text"><span class="mord textrm sizing reset-size6 size3">A</span></span></span></span></span></span><span class="mspace" style="margin-right:-0.15em;"></span><span class="mord text"><span class="mord textrm">T</span><span class="mspace" style="margin-right:-0.1667em;"></span><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.46782999999999997em;"><span style="top:-2.7845em;"><span class="pstrut" style="height:3em;"></span><span class="mord text"><span class="mord textrm">E</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2155em;"><span></span></span></span></span><span class="mspace" style="margin-right:-0.125em;"></span><span class="mord textrm">X</span></span></span></span></span></span>显示:</p>
