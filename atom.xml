@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://idea.web-lab.ml</id>
     <title>前端实验室博客</title>
-    <updated>2020-04-07T06:13:13.474Z</updated>
+    <updated>2020-04-07T06:13:52.540Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://idea.web-lab.ml"/>
     <link rel="self" href="https://idea.web-lab.ml/atom.xml"/>
@@ -13,59 +13,6 @@
         <title type="html"><![CDATA[给网页适配黑暗模式(不使用darkmode.js)]]></title>
         <id>https://idea.web-lab.ml/post/darkmode-js/</id>
         <link href="https://idea.web-lab.ml/post/darkmode-js/">
-        </link>
-        <updated>2020-04-07T06:11:33.000Z</updated>
-        <content type="html"><![CDATA[<p>之前想要给某个陈旧的网页适配黑暗模式......去查了一圈,查到这些(部分经过修改):</p>
-<h3 id="优势">优势</h3>
-<ul>
-<li>可大幅减少耗电量（具体取决于设备的屏幕技术）。</li>
-<li>为弱视以及对强光敏感的用户提高可视性。</li>
-<li>让所有人都可以在光线较暗的环境中更轻松地使用设备。</li>
-</ul>
-<h3 id="系统兼容情况">系统兼容情况</h3>
-<ul>
-<li>macOS 10.14 引入了 darkmode</li>
-<li>iOS13 2019 年 3 月发布的 iOS13 版本加入了 darkmode</li>
-<li>Android 10 (API 级别 29) 及更高版本中提供深色主题背景</li>
-<li>Windows10 2018.10.10</li>
-<li>微信内已经开始支持黑暗模式了</li>
-</ul>
-<p>可见系统适配情况非常可观。</p>
-<hr>
-<h1 id="html-5适配">Html 5适配</h1>
-<h2 id="css-适配">CSS 适配</h2>
-<hr>
-<p>通过媒体查询<code>@media(prefers-color-scheme: dark)</code>来适配<br>
-<code>prefers-color-scheme</code>  的值有两个 <code>dark</code> 和 <code>light</code> 。</p>
-<h3 id="demo">Demo：</h3>
-<pre><code>body {
-  background: #ffffff;
-  color: #333;
-}
-@media (prefers-color-scheme: dark) {
-  body {
-    background: #000000;
-    color: #eee;
-  }
-}
-</code></pre>
-<h2 id="javascript-适配">Javascript 适配</h2>
-<hr>
-<h3 id="demo-2">Demo：</h3>
-<pre><code>if (
-  window.matchMedia &amp;&amp;
-  window.matchMedia(&quot;(prefers-color-scheme: dark)&quot;).matches
-) {
-  //你要写的黑暗模式下的动作
-}
-</code></pre>
-<p>效果不错 😂</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[给网页适配黑暗模式(不使用darkmode.js)]]></title>
-        <id>https://idea.web-lab.ml/post/gei-wang-ye-gua-pei-hei-an-mo-shi-bu-shi-yong-darkmodejs/</id>
-        <link href="https://idea.web-lab.ml/post/gei-wang-ye-gua-pei-hei-an-mo-shi-bu-shi-yong-darkmodejs/">
         </link>
         <updated>2020-04-07T06:11:33.000Z</updated>
         <content type="html"><![CDATA[<p>之前想要给某个陈旧的网页适配黑暗模式......去查了一圈,查到这些(部分经过修改):</p>
