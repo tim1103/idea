@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://idea.web-lab.ml</id>
-    <title>Gridea</title>
-    <updated>2020-04-07T00:57:11.928Z</updated>
+    <title>前端实验室博客</title>
+    <updated>2020-04-07T00:57:45.430Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://idea.web-lab.ml"/>
     <link rel="self" href="https://idea.web-lab.ml/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
     <logo>https://idea.web-lab.ml/images/avatar.png</logo>
     <icon>https://idea.web-lab.ml/favicon.ico</icon>
-    <rights>All rights reserved 2020, Gridea</rights>
+    <rights>All rights reserved 2020, 前端实验室博客</rights>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>https://idea.web-lab.ml/post/hello-gridea/</id>
